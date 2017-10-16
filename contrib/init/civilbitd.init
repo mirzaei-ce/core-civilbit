@@ -1,0 +1,67 @@
+#!/bin/bash
+#
+#  civilbitd The civilbit core server.
+#
+#
+# chkconfig: 345 80 20
+# description: civilbitd
+# processname: civilbitd
+#
+
+# Source function library.
+. /etc/init.d/functions
+
+# you can override defaults in /etc/sysconfig/civilbitd, see below
+if [ -f /etc/sysconfig/civilbitd ]; then
+        . /etc/sysconfig/civilbitd
+fi
+
+RETVAL=0
+
+prog=civilbitd
+# you can override the lockfile via CIVILBITD_LOCKFILE in /etc/sysconfig/civilbitd
+lockfile=${CIVILBITD_LOCKFILE-/var/lock/subsys/civilbitd}
+
+# civilbitd defaults to /usr/bin/civilbitd, override with CIVILBITD_BIN
+civilbitd=${CIVILBITD_BIN-/usr/bin/civilbitd}
+
+# civilbitd opts default to -disablewallet, override with CIVILBITD_OPTS
+civilbitd_opts=${CIVILBITD_OPTS--disablewallet}
+
+start() {
+    echo -n $"Starting $prog: "
+    daemon $DAEMONOPTS $civilbitd $civilbitd_opts
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && touch $lockfile
+    return $RETVAL
+}
+
+stop() {
+    echo -n $"Stopping $prog: "
+    killproc $prog
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && rm -f $lockfile
+    return $RETVAL
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        status $prog
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    *)
+        echo "Usage: service $prog {start|stop|status|restart}"
+        exit 1
+        ;;
+esac

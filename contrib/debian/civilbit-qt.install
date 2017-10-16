@@ -1,0 +1,6 @@
+usr/local/bin/civilbit-qt usr/bin
+share/pixmaps/civilbit32.xpm usr/share/pixmaps
+share/pixmaps/civilbit16.xpm usr/share/pixmaps
+share/pixmaps/civilbit128.png usr/share/pixmaps
+debian/civilbit-qt.desktop usr/share/applications
+debian/civilbit-qt.protocol usr/share/kde4/services/

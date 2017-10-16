@@ -1,0 +1,5 @@
+Building Civilbit
+
+See doc/build-*.md for instructions on building civilbitd,
+the intended-for-services, no-graphical-interface, reference
+implementation of Civilbit.

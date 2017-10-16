@@ -1,0 +1,22 @@
+[Unit]
+Description=Civilbit's distributed currency daemon
+After=network.target
+
+[Service]
+User=civilbit
+Group=civilbit
+
+Type=forking
+PIDFile=/var/lib/civilbitd/civilbitd.pid
+ExecStart=/usr/bin/civilbitd -daemon -pid=/var/lib/civilbitd/civilbitd.pid \
+-conf=/etc/civilbit/civilbit.conf -datadir=/var/lib/civilbitd -disablewallet
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target

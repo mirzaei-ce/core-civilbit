@@ -1,0 +1,33 @@
+# /etc/conf.d/civilbitd: config file for /etc/init.d/civilbitd
+
+# Config file location
+#CIVILBITD_CONFIGFILE="/etc/civilbit/civilbit.conf"
+
+# What directory to write pidfile to?  (created and owned by $CIVILBITD_USER)
+#CIVILBITD_PIDDIR="/var/run/civilbitd"
+
+# What filename to give the pidfile
+#CIVILBITD_PIDFILE="${CIVILBITD_PIDDIR}/civilbitd.pid"
+
+# Where to write civilbitd data (be mindful that the blockchain is large)
+#CIVILBITD_DATADIR="/var/lib/civilbitd"
+
+# User and group to own civilbitd process
+#CIVILBITD_USER="civilbit"
+#CIVILBITD_GROUP="civilbit"
+
+# Path to civilbitd executable
+#CIVILBITD_BIN="/usr/bin/civilbitd"
+
+# Nice value to run civilbitd under
+#CIVILBITD_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+CIVILBITD_OPTS="-disablewallet"
+
+# The timeout in seconds OpenRC will wait for civilbitd to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+CIVILBITD_SIGTERM_TIMEOUT=60
